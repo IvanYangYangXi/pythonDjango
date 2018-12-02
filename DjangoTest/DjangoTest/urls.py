@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app_test import views # 建立app的url连接
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path(r'h.html', views.home), # 访问http://127.0.0.1:8001/h.html 返回app的home函数值
+    path(r'login', views.login), # 访问http://127.0.0.1:8001/login 返回app的login函数值
+    
 ]
