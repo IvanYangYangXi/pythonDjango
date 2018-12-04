@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'i#$__0z!v%2yzogh2w7sic)(suuvzy*@6+)h_v=lo*99yj#r4c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # DEBUG＝True 时，如果出现 bug 便于我们看见问题所在，但是部署时最好不要让用户看见bug的详情，可能一些不怀好心的人攻击网站，造成不必要的麻烦。
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # 允许你设置哪些域名可以访问，当 DEBUG=False 时，这个为必填项，如果不想输入，可以用 ALLOW_HOSTS = ['*'] 来允许所有的。例如：ALLOWED_HOSTS = ['*.cgartech.com','www.cgartech.com']
 
 
 # Application definition
@@ -119,3 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "common_static"),
+)

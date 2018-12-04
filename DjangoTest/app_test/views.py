@@ -15,4 +15,4 @@ def login(request):
     # data = f.read()
     # f.close()
     # return HttpResponse(data)
-    return render(request,'login.html') # 打开 templates 目录下的 login.html 文件返回给浏览器，此方法html文件必须放在templates目录下
+    return render(request,'login.html') # 打开 templates 目录下的 login.html 文件返回给浏览器，此方法html文件必须放在templates目录下;templates 目录可以放在工程根目录或app目录下。
