@@ -192,9 +192,21 @@ Start Django
     ```
     - media文件夹用来存放用户上传的文件，MEDIA_URL为对应的访问网址
 
-
-# 项目视图、网址、URL、模块、模型http://www.cnblogs.com/zhangxinqi/p/8969006.html?tdsourcetag=s_pctim_aiomsg#_label2
-
 ## 在 app 的 views 里添加业务代码
 
 ## 在 urls 里指定 url 连接
+
+# 项目视图、网址、URL、模块、模型http://www.cnblogs.com/zhangxinqi/p/8969006.html?tdsourcetag=s_pctim_aiomsg#_label2
+
+## 用户登录
+### 前端
+  - Template 中添加 login.html 文件，如果用到CSS、js，放到 /APP/static 目录下
+  - 以 POST 方式发送数据到服务端
+  - 使用 POST 方法，需要在 form 标签下加 {% csrf_token %}
+
+### views
+  - 获取前端返回数据有 POST 和 GIT 方法，这里使用 POST 方法获取用户名密码
+
+### 在 urls 中指定 URL 链接
+  - 添加 App
+  - 添加函数链接

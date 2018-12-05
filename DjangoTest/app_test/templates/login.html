@@ -1,6 +1,12 @@
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>IvanYang</title>
+    
+    <!-- CSS样式 -->
+    <link rel="styleSheet" href="/app_test/static/commons.css" />
+
     <style>
         label{
             width: 80px;
@@ -11,16 +17,20 @@
 </head>
 
 <body>
-    <form action="/login" method="POST">
+    <!-- form表单 -->
+    <form action="/login" method="post" >
+        {% csrf_token %} <!-- POST方式提交表单，必须加 {% csrf_token %} ，否则Django会报错：CSRF verification failed. -->
         <p>
             <label for="username">username:</label>
-            <input id="username"
-            type="text" />
+            <input id="username" name='user' type="text" /> <!-- name 用于标记表单上传的内容 -->
         </p>
         <p>
             <label for="password">password:</label>
-            <input id="password" type="text" />
+            <input id="password" name='pwd' type="password" />
             <input type="submit" value="提交" />
+            <span style="color:red;" >{{ error_msg }}</span> <!-- 动态提示内容 -->
         </p>
     </form>
 </body>
+
+</html>
