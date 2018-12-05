@@ -24,6 +24,7 @@ def login(request):
     error_msg = "" # 提示信息
     if request.method == 'POST':
         #获得表单数据
+        # a = request.GET('a') # GET方法
         user = request.POST.get('user',None)
         pwd = request.POST.get('pwd',None)
         if user == 'user1' and pwd == '123':

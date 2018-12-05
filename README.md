@@ -48,8 +48,12 @@ Start Django
 
 
 # 环境配置
-  1. Python
-  2. Django
+  1. Python3
+  2. Django v2.1.3
+    1. 验证：
+    2. import django
+    3. django.VERSION
+    4. django.get_version()
 
 
 # Django基础工程
@@ -202,7 +206,7 @@ Start Django
 ### 前端
   - Template 中添加 login.html 文件，如果用到CSS、js，放到 /APP/static 目录下
   - 以 POST 方式发送数据到服务端
-  - 使用 POST 方法，需要在 form 标签下加 {% csrf_token %}
+  - 使用 POST 方法，需要在 form 标签下加 {% csrf_token %} ,或者注释 settings 中的 **'django.middleware.csrf.CsrfViewMiddleware',** 语句
 
 ### views
   - 获取前端返回数据有 POST 和 GIT 方法，这里使用 POST 方法获取用户名密码
