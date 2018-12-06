@@ -18,7 +18,7 @@
 
 <body>
     <!-- form表单 -->
-    <form action="/login" method="post" >
+    <form action="/login" method="post" enctype="multipart/form-data">  <!-- enctype="multipart/form-data":表单上传文件时必须要添加 -->
         {% csrf_token %} <!-- POST方式提交表单，必须加 {% csrf_token %} ，否则Django会报错：CSRF verification failed. -->
         <p>
             <label for="username">username:</label>
@@ -27,9 +27,12 @@
         <p>
             <label for="password">password:</label>
             <input id="password" name='pwd' type="password" />
-            <input type="submit" value="提交" />
             <span style="color:red;" >{{ error_msg }}</span> <!-- 动态提示内容 -->
         </p>
+        <p>
+            <input type="file" name="file" /> <!-- 提交文件 -->
+        </P>
+        <input type="submit" value="提交" />
     </form>
 </body>
 

@@ -205,11 +205,15 @@ Start Django
 ## 用户登录
 ### 前端
   - Template 中添加 login.html 文件，如果用到CSS、js，放到 /APP/static 目录下
-  - 以 POST 方式发送数据到服务端
+  - 可以通过 GIT、POST 方式发送数据到服务端，通过 FILES 方式发送文件
   - 使用 POST 方法，需要在 form 标签下加 {% csrf_token %} ,或者注释 settings 中的 **'django.middleware.csrf.CsrfViewMiddleware',** 语句
+  - 发送文件，form 标签须添加特殊设置：enctype="multipart/form-data"
 
 ### views
-  - 获取前端返回数据有 POST 和 GIT 方法，这里使用 POST 方法获取用户名密码
+  - 获取前端返回数据
+      - GIT
+      - POST
+      - FILES 获取文件
 
 ### 在 urls 中指定 URL 链接
   - 添加 App

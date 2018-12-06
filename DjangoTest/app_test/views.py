@@ -23,7 +23,7 @@ def login(request):
     
     error_msg = "" # 提示信息
     if request.method == 'POST':
-        #获得表单数据
+        # 获得表单数据
         # a = request.GET('a') # GET方法
         user = request.POST.get('user',None)
         pwd = request.POST.get('pwd',None)
@@ -31,5 +31,14 @@ def login(request):
             return redirect('http://ivan.cgartech.com') # 跳转到……
         else:
             error_msg = '用户名或密码错误'
-    
+        # 获取上传文件
+        obj = request.FILES.get('file')
+        print(obj, type(obj), obj.name)
+        import os
+        file_path = os.path.join('app_test/media', obj.name) # 路径拼接
+        f = open(file_path, mode='wb')
+        for i in obj.chunks():
+            f.write(i)
+        f.close()
+
     return render(request, 'login.html', {'error_msg':error_msg}) 
