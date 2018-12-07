@@ -59,6 +59,7 @@ def orm(request):
 
     # 查
     # result = models.UserInfo.objects.all()
+    # models.UserInfo.objects.all()[:10] 切片操作，获取10个数据，不支持负索引
     result = models.UserInfo.objects.filter(username='root')
     print(result)
     # 打印查找到的所有内容
