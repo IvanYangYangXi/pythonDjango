@@ -42,6 +42,8 @@ Start Django
           python manage.py loaddata appname.json
           ```
   - **更多命令:**
+      - 生成app配置文件:python manage.py makemigrations app_name
+      - 创建数据库表:python manage.py migrate
       - 项目环境终端：python manage.py shell
       - 数据库命令行：python manage.py dbshell
       - 查看命令：python manage.py
@@ -237,4 +239,36 @@ import pymysql
 pymysql.install_as_MySQLdb()
 ```
 
-### 数据库增删改查
+### 数据库增删改查(views 中)
+```
+# 数据库操作
+from app_test import models
+def orm(request):
+    # 创建
+    
+    obj = models.UserInfo(username='ivan',password='123')
+    obj.save()
+
+    dic = {'username':'disUser', 'password':'666'}
+    models.UserInfo.objects.create(**dic)
+
+    models.UserInfo.objects.create(username='root',password='123')
+
+    # 查
+    # result = models.UserInfo.objects.all()
+    result = models.UserInfo.objects.filter(username='root')
+    print(result)
+    # 打印查找到的所有内容
+    for row in result:
+        print(row.id, row.username, row.password)
+
+    # 删除
+    models.UserInfo.objects.filter(username='root').delete()
+
+    # 更新
+    models.UserInfo.objects.filter(id=2).update(password='6699')
+    
+    return HttpResponse('orm')
+```
+
+### urls 中添加链接

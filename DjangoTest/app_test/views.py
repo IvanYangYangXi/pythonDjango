@@ -42,3 +42,33 @@ def login(request):
         f.close()
 
     return render(request, 'login.html', {'error_msg':error_msg}) 
+
+
+# 数据库操作
+from app_test import models
+def orm(request):
+    # 创建
+    
+    obj = models.UserInfo(username='ivan',password='123',salary='1')
+    obj.save()
+
+    dic = {'username':'disUser', 'password':'666','salary':'1'}
+    models.UserInfo.objects.create(**dic)
+
+    models.UserInfo.objects.create(username='root',password='123',salary='1')
+
+    # 查
+    # result = models.UserInfo.objects.all()
+    result = models.UserInfo.objects.filter(username='root')
+    print(result)
+    # 打印查找到的所有内容
+    for row in result:
+        print(row.id, row.username, row.password)
+
+    # 删除
+    models.UserInfo.objects.filter(username='root').delete()
+
+    # 更新
+    models.UserInfo.objects.filter(id=2).update(password='6699')
+
+    return HttpResponse('orm')
