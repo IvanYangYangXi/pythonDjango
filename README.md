@@ -200,9 +200,9 @@ Start Django
 
 ## 在 urls 里指定 url 连接
 
-# 项目视图、网址、URL、模块、模型http://www.cnblogs.com/zhangxinqi/p/8969006.html?tdsourcetag=s_pctim_aiomsg#_label2
+# 案例，项目视图、网址、URL、模块、模型http://www.cnblogs.com/zhangxinqi/p/8969006.html?tdsourcetag=s_pctim_aiomsg#_label2
 
-## 用户登录
+## 实现用户登录
 ### 前端
   - Template 中添加 login.html 文件，如果用到CSS、js，放到 /APP/static 目录下
   - 可以通过 GIT、POST 方式发送数据到服务端，通过 FILES 方式发送文件
@@ -218,3 +218,23 @@ Start Django
 ### 在 urls 中指定 URL 链接
   - 添加 App
   - 添加函数链接
+
+## 数据库操作
+### APP 的 models 中定义数据结构
+
+### 注册 APP ：将 APP 加入到 setting 中
+
+### 执行命令创建数据库表
+    python manage.py makemigrations app_name
+    python manage.py migrate
+
+> **注意**
+> 使用 mysql 需要在 setting 中配置
+> django 默认使用 python 的 MySQLdb 模块链接 mysql,需要主动修改为 pymysql :在 Project同名文件夹下的 __init__ 文件中添加以下代码:
+
+```
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+### 数据库增删改查
