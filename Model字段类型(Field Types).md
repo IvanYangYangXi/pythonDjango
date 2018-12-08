@@ -2,11 +2,33 @@ Models常用字段类型
 
 ======
 
+# 常用字段参数：
+- null， 是否可以为空；
+- default， 默认值；
+- primary_key， 主键；
+- db_column， 列名；
+- db_index， 索引；
+- unique， 唯一索引；
+- unique_for_date， unique_for_mouth， unique_for_year，
+- auto_now， 创建时，自动生成时间
+- auto_now_add， 更新时，自动更新时间
+- choices， django admin 中显示下拉框，避免连表查询
+- blank， django admin 是否可以为空
+- verbose_name， django admin 显示字段中文
+- editable， django admin 是否可以被编辑
+- error_messages， 错误信息
+- help_text， django admin 提示
+- validators， django form ，自定义错误信息
+
+# 常用字段：
 **AutoField**
 它是一个根据 ID 自增长的 IntegerField 字段。通常，你不必直接使用该字段。如果你没在别的字段上指定主 键，Django 就会自动添加主键字段。
 
 **BigIntegerField**
 64位整数，类似于IntegerField，范围从-9223372036854775808 到9223372036854775807。默认的form widget 是TextInput。
+
+**BinaryField**
+二进制
 
 **BooleanField**
 一个布尔值(true/false)字段。
@@ -50,8 +72,16 @@ max_length=254。设置为75是历史遗留问题。
 
 **FloatField**
 该字段在 Python 中使用float 实例来表示一个浮点数。
+- max_digits：总位数(不包括小数点和符号）
 默认的form widget是TextInput。
 请注意FloatField与DecimalField的区别。
+
+**ForeignKey**
+```例：
+# Tag以Contect为外键，一个Contect可以对应多个Tag
+class Tag(models.Model):
+    contact = models.ForeignKey(Contact)
+```
 
 **ImageField**
 和 FileField 一样，只是会验证上传对象是不是一个合法的图象文件

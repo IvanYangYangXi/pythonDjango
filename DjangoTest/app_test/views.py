@@ -29,17 +29,20 @@ def login(request):
         pwd = request.POST.get('pwd',None)
         if user == 'user1' and pwd == '123':
             return redirect('http://ivan.cgartech.com') # 跳转到……
+            # json_data = {'errorcode': 100, 'detail': 'Get success'}
+            # return HttpResponse(json_data,content_type="application/json") # 返回 JSON 格式数据
         else:
             error_msg = '用户名或密码错误'
         # 获取上传文件
         obj = request.FILES.get('file')
-        print(obj, type(obj), obj.name)
-        import os
-        file_path = os.path.join('app_test/media', obj.name) # 路径拼接
-        f = open(file_path, mode='wb')
-        for i in obj.chunks():
-            f.write(i)
-        f.close()
+        if obj is not None:
+            print(obj, type(obj), obj.name)
+            import os
+            file_path = os.path.join('app_test/media', obj.name) # 路径拼接
+            f = open(file_path, mode='wb')
+            for i in obj.chunks():
+                f.write(i)
+            f.close()
 
     return render(request, 'login.html', {'error_msg':error_msg}) 
 
@@ -49,13 +52,13 @@ from app_test import models
 def orm(request):
     # 创建
     
-    obj = models.UserInfo(username='ivan',password='123',salary='1')
+    obj = models.UserInfo(username='ivan',password='123')
     obj.save()
 
     dic = {'username':'disUser', 'password':'666','salary':'1'}
     models.UserInfo.objects.create(**dic)
 
-    models.UserInfo.objects.create(username='root',password='123',salary='1')
+    models.UserInfo.objects.create(username='root',password='123')
 
     # 查
     # result = models.UserInfo.objects.all()

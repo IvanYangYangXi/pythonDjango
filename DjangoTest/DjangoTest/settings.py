@@ -31,12 +31,12 @@ ALLOWED_HOSTS = ['*']  # 允许你设置哪些域名可以访问，当 DEBUG=Fal
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.admin', # 管理站点
+    'django.contrib.auth', # 认证系统
+    'django.contrib.contenttypes', # 用于内容类型的框架
+    'django.contrib.sessions', # 会话框架
+    'django.contrib.messages', # 消息框架
+    'django.contrib.staticfiles', # 管理静态文件框架
     'app_test', # My App
 ]
 
@@ -104,7 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'    # 指定语言（注意不要写错，否则无法启动服务器）
 
 TIME_ZONE = 'UTC'
 
