@@ -19,7 +19,7 @@ def loginSimple(request):
     return render(request,'login.html') # 打开 templates 目录下的 login.html 文件返回给浏览器，此方法html文件必须放在templates目录下;templates 目录可以放在工程根目录或app目录下。
 
 
-def login(request):
+def loginTest(request):
     
     error_msg = "" # 提示信息
     if request.method == 'POST':
@@ -51,13 +51,13 @@ def login(request):
 from app_test import models
 def orm(request):
     # 创建
-    
+    # 方式一：
     obj = models.UserInfo(username='ivan',password='123')
     obj.save()
-
+    # 方式二：
     dic = {'username':'disUser', 'password':'666','salary':'1'}
     models.UserInfo.objects.create(**dic)
-
+    # 方式三：
     models.UserInfo.objects.create(username='root',password='123')
 
     # 查
@@ -76,3 +76,72 @@ def orm(request):
     models.UserInfo.objects.filter(id=2).update(password='6699')
 
     return HttpResponse('orm')
+
+
+# 注册
+def signUp(request):
+    error_msg = "" # 提示信息
+    if request.method == 'POST':
+        # 获得表单数据
+        user = request.POST.get('user',None)
+        pwd = request.POST.get('pwd',None)
+        if user == None or pwd == None:
+            error_msg = '用户名或密码不能为空'
+        else:
+            # 验证用户名密码
+            result = models.UserInfo.objects.filter(username=user)
+            if len(result) == 0:            
+                models.UserInfo.objects.create(username=user, password=pwd)
+                error_msg = '用户创建成功'
+            else:
+                error_msg = '用户名已存在'
+
+    return render(request, 'signUp.html', {'error_msg':error_msg})
+
+import json
+# 游戏注册
+def gameSignUp(request):
+    error_msg = "" # 提示信息
+    if request.method == 'POST':
+         # 获得JSON数据
+        req = json.loads(request.body)
+        user = req.get('user') # user = req['user'] ,此方法 user 必须存在，否则报错，所以使用 get() 方法
+        pwd = req.get('pwd')
+        if user == None or pwd == None:
+            error_msg = 'Username or password cannot be empty'
+        else:
+            # 验证用户名密码
+            result = models.UserInfo.objects.filter(username=user)
+            if len(result) == 0:            
+                models.UserInfo.objects.create(username=user, password=pwd)
+                error_msg = 'User creation success'
+            else:
+                error_msg = 'Username already exists'
+
+    json_data = {'errorcode': 100, 'detail': error_msg}
+    return HttpResponse(json.dumps(json_data),content_type="application/json") # 返回 JSON 格式数据 
+
+
+# 游戏登录
+def gamelogin(request):
+    error_msg = "" # 提示信息
+    if request.method == 'POST':
+        # 获得JSON数据
+        req = json.loads(request.body)
+        user = req.get('user')
+        pwd = req.get('pwd')
+        if user == None or pwd == None:
+            error_msg = 'username or password is none'
+        else:
+            # 验证用户名密码
+            result = models.UserInfo.objects.filter(username=user)
+            if len(result) == 0:            
+                error_msg = 'username does not exist'
+            elif result[0].password == pwd:
+                error_msg = 'Login successfully'
+            else:
+                error_msg = 'ERROR Incorrect username or password'
+                
+
+    json_data = {'errorcode': 101, 'detail': error_msg}
+    return HttpResponse(json.dumps(json_data),content_type="application/json") # 返回 JSON 格式数据 
