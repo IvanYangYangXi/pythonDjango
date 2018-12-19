@@ -118,7 +118,7 @@ def gameSignUp(request):
             else:
                 error_msg = 'Username already exists'
 
-    json_data = {'errorcode': 100, 'detail': error_msg}
+    json_data = {'errorcode': 100, 'msg': error_msg}
     return HttpResponse(json.dumps(json_data),content_type="application/json") # 返回 JSON 格式数据 
 
 
@@ -143,5 +143,5 @@ def gamelogin(request):
                 error_msg = 'ERROR Incorrect username or password'
                 
 
-    json_data = {'errorcode': 101, 'detail': error_msg}
+    json_data = {'errorcode': 101, 'msg': error_msg}
     return HttpResponse(json.dumps(json_data),content_type="application/json") # 返回 JSON 格式数据 
