@@ -104,7 +104,7 @@ def gameSignUp(request):
     error_msg = "" # 提示信息
     if request.method == 'POST':
          # 获得JSON数据
-        req = json.loads(request.body)
+        req = json.loads(request.body.decode("utf-8"))
         user = req.get('user') # user = req['user'] ,此方法 user 必须存在，否则报错，所以使用 get() 方法
         pwd = req.get('pwd')
         if user == None or pwd == None:
