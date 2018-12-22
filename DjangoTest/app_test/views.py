@@ -55,7 +55,7 @@ def orm(request):
     obj = models.UserInfo(username='ivan',password='123')
     obj.save()
     # 方式二：
-    dic = {'username':'disUser', 'password':'666','salary':'1'}
+    dic = {'username':'disUser', 'password':'666'}
     models.UserInfo.objects.create(**dic)
     # 方式三：
     models.UserInfo.objects.create(username='root',password='123')
