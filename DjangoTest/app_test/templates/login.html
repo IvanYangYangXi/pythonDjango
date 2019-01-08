@@ -18,7 +18,7 @@
 
 <body>
     <!-- form表单 -->
-    <form action="/login" method="post" enctype="multipart/form-data">  <!-- enctype="multipart/form-data":表单上传文件时必须要添加 -->
+    <form action="/loginTest" method="post" enctype="multipart/form-data">  <!-- enctype="multipart/form-data":表单上传文件时必须要添加 -->
         {% csrf_token %} <!-- POST方式提交表单，必须加 {% csrf_token %} ，否则Django会报错：CSRF verification failed. -->
         <p>
             <label for="username">username:</label>

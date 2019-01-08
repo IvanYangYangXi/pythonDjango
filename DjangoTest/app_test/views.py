@@ -44,6 +44,18 @@ def loginTest(request):
                 f.write(i)
             f.close()
 
+        # 获取上传的多个文件
+        objs = request.FILES.getlist('files')
+        if objs is not None:
+            print(objs, type(objs))
+            import os
+            for n in range(0,len(objs)):
+                file_path = os.path.join('app_test/media', objs[n].name) # 路径拼接
+                f = open(file_path, mode='wb')
+                for i in objs[n].chunks():
+                    f.write(i)
+                f.close()
+
     return render(request, 'login.html', {'error_msg':error_msg}) 
 
 
